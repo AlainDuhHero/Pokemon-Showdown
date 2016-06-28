@@ -70,11 +70,11 @@ Wisp.updateTourLadder = function (p1, p2, result, room) {
 			Wisp.tourLadder.run(sql2, () => {
 				let reasons = '' + (Math.round(newP1Elo) - Math.round(p1elo)) + ' for ' + (result === 'win' ? 'winning' : (result === 'loss' ? 'losing' : 'tying'));
 				if (reasons.charAt(0) !== '-') reasons = '+' + reasons;
-				room.addRaw('<br />' + Tools.escapeHTML(p1.name) + '\'s rating: ' + Math.round(p1elo) + ' &rarr; <strong>' + Math.round(newP1Elo) + '</strong><br />(' + reasons + ')');
+				room.addRaw('<br />' + Wisp.nameColor(p1.name, true) + '\'s rating: ' + Math.round(p1elo) + ' &rarr; <strong>' + Math.round(newP1Elo) + '</strong><br />(' + reasons + ')');
 
 				reasons = '' + (Math.round(newP2Elo) - Math.round(p2elo)) + ' for ' + (result === 'win' ? 'losing' : (result === 'loss' ? 'winning' : 'tying'));
 				if (reasons.charAt(0) !== '-') reasons = '+' + reasons;
-				room.addRaw(Tools.escapeHTML(p2.name) + '\'s rating: ' + Math.round(p2elo) + ' &rarr; <strong>' + Math.round(newP2Elo) + '</strong><br />(' + reasons + ')');
+				room.addRaw(Wisp.nameColor(p2.name, true) + '\'s rating: ' + Math.round(p2elo) + ' &rarr; <strong>' + Math.round(newP2Elo) + '</strong><br />(' + reasons + ')');
 
 				room.update();
 			});
@@ -102,7 +102,7 @@ exports.commands = {
 				for (let i = 0; i < (this.broadcasting && users.length > 10 ? 10 : users.length); i++) {
 					if (!users[i] || users[i].elo <= 1000) break;
 					let name = (Users.getExact(users[i].userid) ? Users.getExact(users[i].userid).name : users[i].userid);
-					table += '<tr><td><center>' + (i + 1) + '</center></td><td style = "text-align: center">' + name + '</td><td style = "text-align: center">' + Math.round(users[i].elo) + '</td>' +
+					table += '<tr><td><center>' + (i + 1) + '</center></td><td style = "text-align: center">' + Wisp.nameColor(name, true) + '</td><td style = "text-align: center">' + Math.round(users[i].elo) + '</td>' +
 						'<td style = "text-align: center">' + users[i].wins + '</td><td style = "text-align: center">' + users[i].losses + '</td>' +
 						'<td style = "text-align: center">' + users[i].tourwins + '</td></tr>';
 				}
@@ -122,9 +122,9 @@ exports.commands = {
 		Wisp.tourLadder.all("SELECT elo FROM tourladder WHERE userid = '" + toId(target) + "';", (err, users) => {
 			if (err) return console.log(err);
 			if (!users.length) {
-				this.sendReplyBox(target + ' has not played any rated tournaments yet.');
+				this.sendReplyBox(Wisp.nameColor(target, true) + ' has not played any rated tournaments yet.');
 			} else {
-				this.sendReplyBox(target + '\'s Tournament Elo is <b>' + Math.round(users[0].elo) + '</b>.');
+				this.sendReplyBox(Wisp.nameColor(target, true) + '\'s Tournament Elo is <b>' + Math.round(users[0].elo) + '</b>.');
 			}
 			room.update();
 		});
