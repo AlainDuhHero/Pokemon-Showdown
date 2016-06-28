@@ -278,28 +278,12 @@ exports.commands = {
 	},
 	unignorepmshelp: ["/unblockpms - Unblocks private messages. Block them with /blockpms."],
 
-	idle: 'away',
-	afk: 'away',
-	away: function (target, room, user) {
-		this.parse('/blockchallenges');
-		this.parse('/blockpms ' + target);
-	},
-	awayhelp: ["/away - Blocks challenges and private messages. Unblock them with /back."],
-
-	unaway: 'back',
-	unafk: 'back',
-	back: function () {
-		this.parse('/unblockpms');
-		this.parse('/unblockchallenges');
-	},
-	backhelp: ["/back - Unblocks challenges and/or private messages, if either are blocked."],
-
 	rank: function (target, room, user) {
 		if (!target) target = user.name;
 
 		Ladders.visualizeAll(target).then(values => {
 			let buffer = '<div class="ladder"><table>';
-			buffer += '<tr><td colspan="8">User: <strong>' + Tools.escapeHTML(target) + '</strong></td></tr>';
+			buffer += '<tr><td colspan="8">User: <strong>' + Wisp.nameColor(target, true) + '</strong></td></tr>';
 
 			let ratings = values.join('');
 			if (!ratings) {
@@ -1050,8 +1034,8 @@ exports.commands = {
 			buffer.push("No global or room auth.");
 		}
 
-		buffer.unshift("" + targetUsername + " user auth:");
-		connection.popup(buffer.join("\n\n"));
+		buffer.unshift("" + Wisp.nameColor(targetUsername, true) + " user auth:");
+		connection.popup("|html|" + buffer.join("<br><br>"));
 	},
 
 	rb: 'roomban',
