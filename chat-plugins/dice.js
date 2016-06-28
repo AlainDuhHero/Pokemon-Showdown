@@ -92,7 +92,7 @@ class Dice {
 						Wisp.nameColor(p1.name, true) + ' rolled ' + (roll1 + 1) + '!<br />' +
 						Wisp.nameColor(p2.name, true) + ' rolled ' + (roll2 + 1) + '!<br />' +
 						Wisp.nameColor(winner.name, true) + ' has won <b style="color:green">' + (this.bet - taxedAmt) + '</b> ' + buck + '!<br />' +
-						'Better luck next time, ' + Tools.escapeHTML(loser.name) + '!'
+						'Better luck next time, ' + nameColor(loser.name) + '!'
 					).update();
 					Economy.writeMoney(winner.userid, (this.bet - taxedAmt), () => {
 						Economy.writeMoney(loser.userid, -this.bet, () => {
