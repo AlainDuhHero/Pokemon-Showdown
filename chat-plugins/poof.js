@@ -77,6 +77,7 @@ exports.commands = {
 		user.lastPoofMessage = message;
 		user.disconnectAll();
 	},
+		poofhelp: ["/poof - Disconnects the user and leaves a message in the lobby."],
 
 	poofoff: 'nopoof',
 	nopoof: function () {
@@ -84,10 +85,23 @@ exports.commands = {
 		Config.poofOff = true;
 		return this.sendReply("Poof is now disabled.");
 	},
-
+        poofoffhelp: ["/poofoff - Disable the use of the /poof command."],
+        
 	poofon: function () {
 		if (!this.can('poofoff')) return false;
 		Config.poofOff = false;
 		return this.sendReply("Poof is now enabled.");
 	},
+	poofonhelp: ["/poofon - Enable the use /poof command."],
+	
+	poofmessageslist: 'poofmessages',
+	pooflist: 'poofmessages',
+	poofmessages: function (target, room, user) {
+		if(!this.runBroadcast()) return false;
+		let display = [];
+		for(let i = 0; i<messages.length; i++) 
+			display.push('<b>' + i + '. </b>' + messages[i]);
+		return this.sendReplyBox(display.join('<br>'));
+	}
+	poofmessageshelp: ["/poofmessages - shows the list of poof messages"],
 };
