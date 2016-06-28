@@ -182,6 +182,7 @@ exports.commands = {
 		});
 	},
 
+	buyticket: 'claim',
 	claim: function (target, room, user) {
 		if (!target) return this.sendReply("Usage: /claim [item]");
 		let targetSplit = target.split(',');
@@ -406,7 +407,7 @@ exports.commands = {
 						if (err) return console.log("credits4: " + err);
 						let averageCredits = rows[0]['AVG(credits)'];
 
-						this.sendReplyBox("The richest user is currently <b><font color=#24678d>" + Tools.escapeHTML(richestUser) + "</font></b> with <b><font color=#24678d>" +
+						this.sendReplyBox("The richest user is currently <b><font color=#24678d>" + Wisp.nameColor(richestUser, true) + "</font></b> with <b><font color=#24678d>" +
 							richestUserCred + "</font></b> credits.</font></b><br />There is a total of <b><font color=#24678d>" +
 							userCount + "</font></b> users with at least one credits.<br /> The average user has " +
 							"<b><font color=#24678d>" + Math.round(averageCredits) + "</font></b> credits.<br /> There is a total of <b><font color=#24678d>" +
@@ -440,7 +441,7 @@ exports.commands = {
 				} else {
 					username = rows[u].userid;
 				}
-				output += '<tr><td>' + count + '</td><td>' + Tools.escapeHTML(username) + '</td><td>' + rows[u].credits + '</td></tr>';
+				output += '<tr><td>' + count + '</td><td>' + Wisp.nameColor(username, true) + '</td><td>' + rows[u].credits + '</td></tr>';
 				count++;
 			}
 			self.sendReplyBox(output);
