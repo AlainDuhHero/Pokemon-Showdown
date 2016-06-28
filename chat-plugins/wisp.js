@@ -866,12 +866,18 @@ exports.commands = {
 		case 'autovoice':
 			target = '+';
 			break;
+		case 'autoop':
+			target = '$';
+			break;			
 		case 'autodriver':
 			target = '%';
 			break;
 		case 'automod':
 			target = '@';
 			break;
+		case 'autoleader':
+			target = '&';
+			break;			
 		case 'autoowner':
 			target = '#';
 			break;
