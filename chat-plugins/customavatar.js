@@ -131,7 +131,7 @@ exports.commands = {
 
 				Rooms.get('upperstaff').add('|raw|' + Wisp.nameColor(userid, true) + ' has received a custom avatar from ' + Wisp.nameColor(user.name, true)).update();
 				Wisp.messageSeniorStaff('/html ' + Wisp.nameColor(userid, true) + ' has received a custom avatar from ' + Wisp.nameColor(user.name, true));
-				Users.get(userid).popup('|modal||html|You have received a custom avatar from <b><font color="' + Wisp.hashColor(user.userid) + '">' + Tools.escapeHTML(user.name) + '</font></b>: <img src="' + avatar + '" width="80" height="80">');
+				Users.get(userid).popup('|modal||html|You have received a custom avatar from <b><font color="' + Wisp.nameColor(user.userid) + ': <img src="' + avatar + '" width="80" height="80">');
 				room.update();
 			}.bind(this));
 			break;
@@ -154,6 +154,7 @@ exports.commands = {
 
 				delete Config.customavatars[targetUserid];
 				this.sendReply(targetUserid + "'s custom avatar removed successfully");
+				targetUserid.popup('|modal||html|' + Wisp.nameColor(user.userid, true) + ' has removed your custom avatar.');
 			}.bind(this));
 			break;
 
