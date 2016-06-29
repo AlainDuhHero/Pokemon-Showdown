@@ -798,6 +798,7 @@ exports.commands = {
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
 		room.auth[targetUser.userid] = '#';
 		room.founder = targetUser.userid;
+		Users.get(targetUser).popup('|modal||html|You were appointed Room founder by ' + Wisp.nameColor(user.name));
 		this.addModCommand(targetUser.name + ' was appointed to Room Founder by ' + user.name + '.');
 		room.onUpdateIdentity(targetUser);
 		room.chatRoomData.founder = room.founder;
@@ -820,6 +821,7 @@ exports.commands = {
 
 		delete room.auth[userid];
 		delete room.founder;
+		Users(name).popup('|modal||html|Your position of room founder in ' room.id + ' was removed by ' + Wisp.nameColor(user.userid))
 		this.sendReply("(" + name + " is no longer Room Founder.)");
 		if (targetUser) targetUser.updateIdentity();
 		if (room.chatRoomData) {
@@ -849,7 +851,7 @@ exports.commands = {
 		room.auth[userid] = '#';
 		this.addModCommand("" + name + " was appointed Room Owner by " + user.name + ".");
 		if (targetUser) {
-			targetUser.popup("You were appointed Room Owner by " + user.name + " in " + room.id + ".");
+			targetUser.popup("|modal||html|You were appointed Room Owner by " + Wisp.nameColor(user.name, true) + " in " + room.id + ".");
 			room.onUpdateIdentity(targetUser);
 		}
 		Rooms.global.writeChatRoomData();
@@ -947,10 +949,10 @@ exports.commands = {
 			if (needsPopup) targetUser.popup("You were demoted to Room " + groupName + " by " + user.name + " in " + room.id + ".");
 		} else if (nextGroup === '#') {
 			this.addModCommand("" + name + " was promoted to " + groupName + " by " + user.name + ".");
-			if (needsPopup) targetUser.popup("You were promoted to " + groupName + " by " + user.name + " in " + room.id + ".");
+			if (needsPopup) targetUser.popup("|modal||html|You were promoted to " + groupName + " by " + Wisp.nameColor(user.name, true) + " in " + room.id + ".");
 		} else {
 			this.addModCommand("" + name + " was promoted to Room " + groupName + " by " + user.name + ".");
-			if (needsPopup) targetUser.popup("You were promoted to Room " + groupName + " by " + user.name + " in " + room.id + ".");
+			if (needsPopup) targetUser.popup("|modal||html|You were promoted to Room " + groupName + " by " + Wisp.nameColor(user.name, true) + " in " + room.id + ".");
 		}
 
 		if (targetUser) targetUser.updateIdentity(room.id);
