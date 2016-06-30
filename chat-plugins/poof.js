@@ -50,7 +50,6 @@ const messages = [
 	"is blasting off again", // bought by L Chevy 12
 	"use defog on Bisharp", // bought by Hope/Fallen Blood
 	"got outsassed by Félicette!", // bought by FÃ©licette
-	"got outclassed by Félicette!",
 	"was proclaimed an enemy of the state by King Jong-un!", // bought by KJU
 	"got haxed by minatokyuubi", // bought by minatokyuubi
 ];
