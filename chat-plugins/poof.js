@@ -101,7 +101,7 @@ exports.commands = {
 		let display = [];
 		for(let i = 0; i<messages.length; i++) 
 			display.push('<b>' + i + '. </b>' + messages[i]);
-		return this.sendReplyBox(display.join('<br>'));
-	}
-	poofmessageshelp: ["/poofmessages - shows the list of poof messages"],
+		return this.sendReplyBox('<div style="max-height: 300px; overflow-y: scroll"><b><u><center>Wisp Poof Messages List</center></u></b>' + display.join('<br>') + '</div>');
+	},
+	poofmessageshelp: ["/poofmessages - Shows the list of poof messages"],
 };
