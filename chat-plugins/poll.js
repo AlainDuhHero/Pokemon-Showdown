@@ -23,7 +23,7 @@ class Poll {
 		this.timeout = null;
 		this.timeoutMins = 0;
 		this.startTime = Date.now();
-		this.startedUser = '<font color=' + Wisp.hashColor(questionData.username) + '>' + Tools.escapeHTML(questionData.username) + '</font>';
+		this.startedUser = Wisp.nameColor(questionData.username);
 
 		this.options = new Map();
 		for (let i = 0; i < options.length; i++) {
