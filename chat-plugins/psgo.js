@@ -473,7 +473,7 @@ exports.commands = {
 		if (!this.runBroadcast()) return;
 		return this.sendReply('|raw|' + getShopDisplay(shop));
 	},
-
+	
 	open: 'openpack',
 	openpacks: 'openpack',
 	openpack: function (target, room, user) {
@@ -1145,9 +1145,11 @@ exports.commands = {
 		Db('completedTrades').set(now, newTransfer);
 	},
 
+        psgo: 'cardshelp',
+	wtcg: 'cardshelp',
 	cardshelp: function (target, room, user) {
 		if (!this.runBroadcast()) return;
-		return this.sendReplyBox("<center><b><u>PSGO Help:</u></b></center><br>" +
+		return this.sendReplyBox("<center><b><u>Wisp Trading Card Game:</u></b></center><br>" +
 			"<b>/buypack</b> - Buys a pack from the pack shop.<br>" +
 			"<b>/packshop</b> - Shows the shop for buying packs.<br>" +
 			"<b>/openpack</b> - Opens a pack that has been purchased from the shop.<br>" +
@@ -1162,6 +1164,7 @@ exports.commands = {
 			"<b>/transferallcards</b> - /transferallcards [user] - transfers all of your cards to the target user.<br>"
 		);
 	},
+
 
 	givecard: 'spawncard',
 	spawncard: function (target, room, user, connection, cmd) {
